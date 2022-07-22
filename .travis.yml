@@ -1,5 +1,7 @@
 language: bash
 dist: bionic
+services:
+  - docker
 before_install:
   - sudo rm -rf /var/lib/apt/lists/*
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -12,5 +14,6 @@ before_install:
 script:
   - docker buildx version
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-  - docker buildx create --use
+  - docker buildx create --use --name jenkins-builder
+  - docker buildx inspect travis-builder --bootstrap
   - docker buildx build --push --tag x3platform/alpine:latest --platform linux/amd64,linux/arm64,linux/riscv64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 --file ./Dockerfile .  
