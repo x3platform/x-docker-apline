@@ -12,10 +12,8 @@ before_install:
   - curl --silent -L "https://github.com/docker/buildx/releases/download/v0.8.2/buildx-v0.8.2.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
   - chmod a+x ~/.docker/cli-plugins/docker-buildx
 script:
-  - docker info
-  - docker buildx version
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - sudo systemctl start docker
-  - docker buildx create --use --name travis-builder
-  - docker buildx inspect travis-builder --bootstrap
-  - docker buildx build --push --tag x3platform/alpine:latest --platform linux/amd64,linux/arm64,linux/riscv64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 --file ./Dockerfile .  
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  #- docker buildx create --use --name travis-builder
+  #- docker buildx inspect travis-builder --bootstrap
+  - docker buildx build --push --tag x3platform/alpine:latest --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6 --file ./Dockerfile .  
