@@ -9,7 +9,7 @@ ENV TIME_ZONE="Asia/Shanghai"
 # 设置常用工具和设置时区为 Asia/Shanghai
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update \
-    && apk add tzdata curl busybox-extras \
+    && apk add tzdata curl \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && apk del tzdata
