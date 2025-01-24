@@ -1,5 +1,5 @@
 # 将官方 Alpine 运行时用作父镜像
-FROM alpine
+FROM alpine:3.16
 # 维护该镜像的用户信息
 LABEL maintainer="ruanyu <ruanyu@x3platform.com>"
 
